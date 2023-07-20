@@ -1,0 +1,2 @@
+Roll No   Candidate Name   Sub   Mrk   Grd   Sub   Mrk   Grd   Sub   Mrk   Grd   Sub   Mrk   Grd   Sub   Mrk   Grd   INTL-SUB      Result
+1205769   F2 PATEL         241   080   B2    304   086   B1    308   084   B1    027   084   B1    030   088   A1    B1  B1  B1     PASS
