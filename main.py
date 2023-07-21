@@ -1,5 +1,6 @@
 import pickle as pkl
 import csv
+import mysql.connector as sql
 
 subject_code = {'027': 'History', '028': 'Political Science', '029': 'Geography', '030': 'Economics', '037': 'Psychology', '039': 'Sociology',
                 '040': 'Philosophy', '041': 'Mathematics', '042': 'Physics', '043': 'Chemistry', '044': 'Biology', '048': 'Physical Education',
@@ -10,6 +11,31 @@ subject_code = {'027': 'History', '028': 'Political Science', '029': 'Geography'
 subject_order = ["History", "Political Science", "Geography", "Economics", "Psychology", "Sociology", "Philosophy", "Mathematics", "Physics", "Chemistry"
                  "Biology", "Physical Education", "Painting" "Business Studies", "Accountancy", "Home Science", "Informatics Practice", "Enterprenurship",
                  "Dance", "Legal Studies", "Computer Science", "English Core", "Hindi Core", "Applied Mathematics"]
+
+
+def add_csv(file_name, subject):
+    # csv file objects
+    file_obj_csv = open(file_name, 'w', newline='\n')
+    writer_object = csv.writer(file_obj_csv)
+    # binary file objects
+    file_obj_bin = open('temp.dat', 'rb')
+    data_heading = ['Roll Number', 'Name', 'Subject', 'Grades']
+    writer_object.writerow(data_heading)
+    while True:
+        data_list = []
+        try:
+            data = pkl.load(file_obj_bin)
+            data_list = [data.pop(0), data.pop(0)]
+            try:
+                if data[0][subject]:
+                    data_list.extend([data[0][subject][0], data[0][subject][1]])
+            except KeyError:
+                continue
+        except EOFError:
+            break
+        writer_object.writerow(data_list)
+    file_obj_csv.close()
+    file_obj_bin.close()
 
 
 def add_csv_all(file_name):
@@ -104,5 +130,4 @@ def read_file(file_path):
 
 
 read_file('sample-data.txt')
-add_csv_all('csv_file.csv')
-print('done')
+add_csv('csv_file.csv', 'English Core')
