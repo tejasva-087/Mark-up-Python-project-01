@@ -4,3 +4,4 @@ others.txt
 *.csv
 sample.py
 .vscode
+*.idea

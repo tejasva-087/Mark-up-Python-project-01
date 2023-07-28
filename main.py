@@ -2,15 +2,25 @@ import pickle as pkl
 import csv
 import mysql.connector as sql
 
-subject_code = {'027': 'History', '028': 'Political Science', '029': 'Geography', '030': 'Economics', '037': 'Psychology', '039': 'Sociology',
-                '040': 'Philosophy', '041': 'Mathematics', '042': 'Physics', '043': 'Chemistry', '044': 'Biology', '048': 'Physical Education',
-                '049': 'Painting', '054': 'Business Studies', '055': 'Accountancy', '064': 'Home Science', '065': 'Informatics Practice',
-                '066': 'Enterprenurship', '056': 'Dance', '073': 'Legal Studies', '083': 'Computer Science', '301': 'English Core', '302': 'Hindi Core',
-                '241': 'Applied Mathematics'}
+subject_code = {'027': 'History', '028': 'Political Science', '029': 'Geography', '030': 'Economics',
+                '037': 'Psychology', '039': 'Sociology', '040': 'Philosophy', '041': 'Mathematics', '042': 'Physics',
+                '043': 'Chemistry', '044': 'Biology', '048': 'Physical Education', '049': 'Painting',
+                '054': 'Business Studies', '055': 'Accountancy', '064': 'Home Science', '065': 'Informatics Practice',
+                '066': 'Entrepreneurship', '056': 'Dance', '073': 'Legal Studies', '083': 'Computer Science',
+                '301': 'English Core', '302': 'Hindi Core', '241': 'Applied Mathematics'}
 
-subject_order = ["History", "Political Science", "Geography", "Economics", "Psychology", "Sociology", "Philosophy", "Mathematics", "Physics", "Chemistry"
-                 "Biology", "Physical Education", "Painting" "Business Studies", "Accountancy", "Home Science", "Informatics Practice", "Enterprenurship",
-                 "Dance", "Legal Studies", "Computer Science", "English Core", "Hindi Core", "Applied Mathematics"]
+subject_order = ["History", "Political Science", "Geography", "Economics", "Psychology", "Sociology", "Philosophy",
+                 "Mathematics", "Physics", "Chemistry", "Biology", "Physical Education", "Painting" "Business Studies",
+                 "Accountancy", "Home Science", "Informatics Practice", "Entrepreneurship", "Dance", "Legal Studies",
+                 "Computer Science", "English Core", "Hindi Core", "Applied Mathematics"]
+
+
+def database_connect(_host, _user, _password):
+    sql_connector = sql.connect(host=_host, user=_user, passwd=_password)
+    if sql_connector.is_connected():
+        return sql_connector.cursor()
+    else:
+        return -1
 
 
 def add_csv(file_name, subject):
@@ -22,7 +32,6 @@ def add_csv(file_name, subject):
     data_heading = ['Roll Number', 'Name', 'Subject', 'Grades']
     writer_object.writerow(data_heading)
     while True:
-        data_list = []
         try:
             data = pkl.load(file_obj_bin)
             data_list = [data.pop(0), data.pop(0)]
@@ -54,12 +63,11 @@ def add_csv_all(file_name):
     while True:
         data_list = []
         try:
-            # Creating a array to be added to the csv file containing roll number and name
+            # Creating an array to be added to the csv file containing roll number and name
             data = pkl.load(file_object_bin)
             data_list.extend([data.pop(0), data.pop(0), data.pop(-1)])
             # Creating a dictionary of sorted marks, later to be added in array
-            result = {}
-            result['Others'] = ""
+            result = {'others': ''}
             for i in subject_order:
                 try:
                     if data[0][i]:
@@ -127,7 +135,3 @@ def read_file(file_path):
             pkl.dump(details, file_obj_bin)
     file_obj_bin.close()
     file_object.close()
-
-
-read_file('sample-data.txt')
-add_csv('csv_file.csv', 'English Core')
