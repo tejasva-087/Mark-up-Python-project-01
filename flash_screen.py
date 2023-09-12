@@ -2,6 +2,11 @@ from PIL import ImageTk
 import ttkbootstrap as ttk
 from tkinter.font import Font
 from datetime import date
+import ctypes
+
+
+def destroy(root):
+    root.destroy()
 
 
 def splash_screen():
@@ -9,12 +14,16 @@ def splash_screen():
     font_color = '#fff'
     font_family = 'Nueva Std Cond'
     root = ttk.Window()
+    root.iconbitmap(r'img/mark-up-logo.jpg')
+
+    # Hiding titlebar
+    root.overrideredirect(True)
 
     # Making it non resizable
     root.resizable(False, False)
 
     # Making the window spawn in middle
-    root.geometry(f'950x600+{int((root.winfo_screenwidth() / 2) - 500)}+{int((root.winfo_screenheight() / 2) - 300)}')
+    root.geometry(f'950x600+{int((root.winfo_screenwidth()/2)-(950/2))}+{int((root.winfo_screenheight()/2)-300)}')
 
     # ========================================
     """Setting the background of the window"""
@@ -60,7 +69,8 @@ def splash_screen():
         family=font_family,
         size=18
     )
-    bg_canvas.create_text(273, 500, text=f'Created by Tejasva Khandelwal. All rights reserved {date.today().year}')
+    bg_canvas.create_text(280, 500, text=f'Created by Tejasva Khandelwal. © All rights reserved {date.today().year}', fill=font_color)
+    root.after(3000, lambda: destroy(root))
     root.mainloop()
 
 
