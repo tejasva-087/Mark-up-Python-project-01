@@ -6,12 +6,13 @@ from tkinter.font import Font
 def splash_screen():
     root = ttk.Window()
     # Font for the hero text
-    big_font_color = '#fff'
+    big_font_color = '#333'
     big_font = Font(
         family='Impact',
         size=100,
         weight="normal"
     )
+    # Font for hero side text
 
     # Making it non resizable
     root.resizable(False, False)
@@ -25,14 +26,10 @@ def splash_screen():
     # Image variable
     bg = ImageTk.PhotoImage(file=r'img/background.png')
     # Canvas Image holder
-    bg_canvas = ttk.Canvas(root, width=950, height=600)
+    bg_canvas = ttk.Canvas(root, width=950, height=550)
     bg_canvas.pack(fill='both', expand=True)
     # Setting image in canvas
     bg_canvas.create_image(0, 0, image=bg, anchor='nw')
-
-    # Creating text in canvas
-    bg_canvas.create_text(300, 150, text='Mark Up', font=big_font, fill=big_font_color)
-    bg_canvas.create_text(165, 300, text='2.0', font=big_font, fill=big_font_color)
 
     root.mainloop()
 
