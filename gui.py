@@ -2,7 +2,6 @@ from PIL import ImageTk
 import ttkbootstrap as ttk
 from tkinter.font import Font
 from datetime import date
-import ctypes
 
 
 def destroy(root):
@@ -14,7 +13,8 @@ def splash_screen():
     font_color = '#fff'
     font_family = 'Nueva Std Cond'
     root = ttk.Window()
-    root.iconbitmap(r'img/mark-up-logo.jpg')
+    # Title
+    root.title('Mark Up')
 
     # Hiding titlebar
     root.overrideredirect(True)
@@ -23,7 +23,7 @@ def splash_screen():
     root.resizable(False, False)
 
     # Making the window spawn in middle
-    root.geometry(f'950x600+{int((root.winfo_screenwidth()/2)-(950/2))}+{int((root.winfo_screenheight()/2)-300)}')
+    root.geometry(f'950x600+{int((root.winfo_screenwidth()/2)-500)}+{int((root.winfo_screenheight()/2)-350)}')
 
     # ========================================
     """Setting the background of the window"""
@@ -32,7 +32,8 @@ def splash_screen():
     bg = ImageTk.PhotoImage(file=r'img/background.png')
     # Canvas Image holder
     bg_canvas = ttk.Canvas(root, width=950, height=550)
-    bg_canvas.pack(fill='both', expand=True)
+    # bg_canvas.pack(fill='both', expand=True)
+    bg_canvas.place(x=0, y=0, relheight=1, relwidth=1)
     # Setting image in canvas
     bg_canvas.create_image(0, 0, image=bg, anchor='nw')
 
@@ -70,7 +71,9 @@ def splash_screen():
         size=18
     )
     bg_canvas.create_text(280, 500, text=f'Created by Tejasva Khandelwal. © All rights reserved {date.today().year}', fill=font_color)
-    root.after(3000, lambda: destroy(root))
+
+    # Destroying within 3 seconds
+    # root.after(3000, lambda: destroy(root))
     root.mainloop()
 
 
