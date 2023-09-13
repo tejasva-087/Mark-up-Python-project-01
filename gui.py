@@ -34,6 +34,7 @@ def splash_screen():
     bg_canvas = ttk.Canvas(root, width=950, height=550)
     # bg_canvas.pack(fill='both', expand=True)
     bg_canvas.place(x=0, y=0, relheight=1, relwidth=1)
+    
     # Setting image in canvas
     bg_canvas.create_image(0, 0, image=bg, anchor='nw')
 
