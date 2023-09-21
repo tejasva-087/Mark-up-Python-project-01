@@ -6,3 +6,5 @@ sample.py
 .vscode
 *.idea
 sample.py
+__pycache__/
+
