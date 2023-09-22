@@ -1,5 +1,6 @@
 Roll No   Candidate Name   Sub   Mrk   Grd   Sub   Mrk   Grd   Sub   Mrk   Grd   Sub   Mrk   Grd   Sub   Mrk   Grd   INTL-SUB      Result
-1209845   A2 PATEL         245   086   B1    301   082   B2    301   080   B2    027   084   B1    028   090   A1    B1  B1  B1     PASS
+7098321   U3 SINGH         302   086   B1    241   080   B2    301   088   A1    028   085   A2    029   082   B1    A1  A1  A1     PASS
+1209845   A2 PATEL         242   086   B1    303   082   B2    301   080   B2    127   084   B1    129   090   A1    B1  B1  B1     PASS
 6432109   B2 SHARMA        301   084   B1    302   082   B2    241   088   A1    027   085   A2    030   086   B1    A2  A2  A2     PASS
 3892761   Z1 KHAN          302   088   A1    241   086   B1    301   082   B2    028   080   B2    029   088   A1    A1  A1  A1     PASS
 9876234   C2 SINGH         302   086   B1    241   080   B2    301   088   A1    028   085   A2    029   082   B1    B2  B2  B2     PASS
@@ -19,7 +20,6 @@ Roll No   Candidate Name   Sub   Mrk   Grd   Sub   Mrk   Grd   Sub   Mrk   Grd  
 2456019   R3 KHAN          302   088   A1    241   086   B1    301   082   B2    028   080   B2    029   088   A1    B2  B2  B2     PASS
 5098762   S3 PATEL         241   086   B1    301   082   B2    302   080   B2    027   084   B1    028   090   A1    A2  A2  A2     PASS
 1298760   T3 SHARMA        301   084   B1    302   082   B2    241   088   A1    027   085   A2    030   086   B1    B1  B1  B1     PASS
-7098321   U3 SINGH         302   086   B1    241   080   B2    301   088   A1    028   085   A2    029   082   B1    A1  A1  A1     PASS
 2890123   V3 MEHTA         241   082   B2    301   084   B1    302   080   B2    027   088   A1    030   084   B1    A2  A2  A2     PASS
 7345098   W3 KHAN          302   084   B1    241   086   B1    301   080   B2    028   090   A1    029   082   B1    B1  B1  B1     PASS
 2567843   X3 PATEL         241   080   B2    301   086   B1    302   084   B1    027   084   B1    030   088   A1    A1  A1  A1     PASS

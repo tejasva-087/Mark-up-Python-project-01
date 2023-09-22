@@ -6,5 +6,7 @@ sample.py
 .vscode
 *.idea
 sample.py
-__pycache__/
 
+node_modules/
+package-lock.json
+__pycache__/

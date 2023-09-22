@@ -1,0 +1,19 @@
+{
+  "name": "mark-up-python-project-01",
+  "version": "1.0.0",
+  "description": "A gui tool for handeling marks",
+  "main": "index.js",
+  "scripts": {
+    "watch:sass": "node-sass sass/main.scss css/style.css -w",
+    "dev-server": "live-server",
+    "start": "npm-run-all --parallel dev-server watch:sass",
+    "start-app": "electron ."
+  },
+  "author": "Tejasva Khandelwal",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^26.2.2",
+    "node-sass": "^9.0.0",
+    "npm-run-all": "^4.1.5"
+  }
+}
