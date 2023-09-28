@@ -1,4 +1,6 @@
 class Convert:
+    """Converts a string of given data to separated key value pairs"""
+
     subject_code = {'027': 'History', '028': 'Political Science', '029': 'Geography', '030': 'Economics',
                     '037': 'Psychology', '039': 'Sociology', '040': 'Philosophy', '041': 'Mathematics',
                     '042': 'Physics',
@@ -8,61 +10,53 @@ class Convert:
                     '066': 'Entrepreneurship', '056': 'Dance', '073': 'Legal Studies', '083': 'Computer Science',
                     '301': 'English Core', '302': 'Hindi Core', '241': 'Applied Mathematics'}
 
-    """Class to convert the data from text file to give specific data and other needs"""
     def __init__(self, string: str):
         self.string = string
+        self.roll_no = int(string[0:7])  # Getting the roll number at the start with specific length
+        self.result = string.split().pop()  # Retrieving the last characters (PASS / FAIL)
 
-    def get_roll_no(self):  # Getting roll number of student
-        if self.string.split()[0].isnumeric():
-            return self.string[0:8]
-        else:
-            return False
-
-    def get_name(self):  # Getting name of student
-        arr = self.string.split()
-        arr.pop(0)
-        name = ''
-        for i in range(len(arr)):
-            # Checking if i(subject code) is numeric and i+1(marks) is numeric and finally i+2(grades) are of length 2
-            if arr[i].isnumeric() and arr[i + 1].isnumeric() and len(arr[i + 2]) == 2:
+    @property
+    def name(self):
+        name_str = ''
+        arr = self.string.split()[1:]  # Making the array without roll number
+        while True:
+            # Removing a element to check for digit only string
+            arr_pop = arr.pop(0)  # Removing roll number
+            # Breaking for digit only string
+            if arr_pop.isdigit():
                 break
-            elif arr[i].isalnum():
-                name += arr[i] + ' '
-        if name == '':
-            return False
-        else:
-            return name.strip()
+            # Concatenating to join name
+            else:
+                name_str += arr_pop + ' '
+        return name_str.strip()
 
-    def get_marks(self):
-        grade = {}
-        num = 1
-        arr = self.string.split()
-        # Checking for last index(result) to be 'pass' and after that the last marks excluding \
-        # (INTEL-SUB) at index -2, -3, -4 and (grades) at index -5
-        if arr[-1].lower() == 'pass' and arr[-6].isnumeric() and arr[-7].isnumeric():
-            # Deleting the last elements that includes INTEL-SUB and Result
-            del arr[len(arr) - 4: len(arr)]
-            # Reversing the array free from the last 4 elements
-            arr.reverse()
-            for i in range(0, len(arr) - 1, 3):  # i = [0, 3, 6, 9, ...]
-                # [grades, marks, subject_code] as we reversed the array
-                # Checking for marks to be correct pattern
-                marks = len(arr[i + 1]) == 3 and arr[i + 1].isnumeric()
-                # Checking for subject code
-                subject_code = len(arr[i+2]) == 3 and arr[i+2].isnumeric()
-                # Checking the array for grades then for the marks and subject code to be numeric and of length 3
-                if len(arr[i]) == 2 and marks and subject_code:
-                    try:
-                        grade[Convert.subject_code[arr[i+2]]] = [arr[i+1], arr[i]]
-                    except KeyError:
-                        grade[f'subject-code {arr[i+2]}'] =  [arr[i+1], arr[i]]
-                        num += 1
-                else:
-                    break
-            return grade
+    @property
+    def marks(self):
+        score_details = {}
+        # Removing the name from string then converting to array
+        arr = self.string.replace(f'{self.name}', '').split()
+        arr.pop(0)  # removing roll number
+        for i in range(0, len(arr), 3):
+            if arr[i].isdigit():
+                try:
+                    score_details[f'{self.subject_code[arr[i]]}'] = [int(arr[i+1]), arr[i+2]]
+                except KeyError:
+                    score_details[f'SUBJECT-CODE: {arr[i]}'] = [int(arr[i+1]), arr[i+2]]
+            else:
+                break
+        return score_details
 
-        else:
-            return False
+    def percentage(self):
+        total_num = 0  # For calculating total number of subjects
+        sum_ = 0  # For calculating the total marks of subjects
+        marks = self.marks
+        for i in marks.values():
+            sum_ += i[0]
+            total_num += 1
+        return sum_ / total_num  # Returning the percentage of student
 
-    def get_result(self):
-        return self.string.split()[-1]
+    def __repr__(self):
+        return f'(Convert({self.roll_no}, {self.name}, {self.marks}, {self.result}))'
+
+    def __str__(self):
+        return f'{self.name} {self.roll_no} scored {self.marks} and is declared {self.result}'

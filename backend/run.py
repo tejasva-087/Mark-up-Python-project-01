@@ -1,15 +1,18 @@
-from converter import Convert
+# Initializing String
+test_str = "GeeksForGeeks"
 
+# Removing char at pos 3
+# using replace
+new_str = test_str.replace('e', '')
 
-with open('sample-data.txt', 'r') as file_obj:
-    while True:
-        data = file_obj.readline()
-        if data == '':
-            break
-        else:
-            if data[0].isdigit():
-                convert_data = Convert(data)
-                print(convert_data.get_roll_no())
-                print(convert_data.get_name())
-                print(convert_data.get_marks())
-                print(convert_data.get_result())
+# Printing string after removal
+# removes all occurrences of 'e'
+print("The string after removal of i'th character( doesn't work) : " + new_str)
+
+# Removing 1st occurrence of s, i.e 5th pos.
+# if we wish to remove it.
+new_str = test_str.replace('s', '', 1)
+
+# Printing string after removal
+# removes first occurrences of s
+print("The string after removal of i'th character(works) : " + new_str)

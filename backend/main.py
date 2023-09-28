@@ -15,6 +15,25 @@ subject_order = ["History", "Political Science", "Geography", "Economics", "Psyc
                  "Computer Science", "English Core", "Hindi Core", "Applied Mathematics"]
 
 
+def seperator_single(subject):
+    file_obj = open('temp.dat', 'rb')
+    data_container = [['Roll Number', 'Name', f'{subject} Marks', 'Grades']]
+    while True:
+        try:
+            data = pkl.load(file_obj)
+            data_list = [int(data.pop(0)), data.pop(0)]
+            try:
+                if data[0][subject]:
+                    data_list.extend([int(data[0][subject][0]), data[0][subject][1]])
+                    data_container.append(data_list)
+            except KeyError:
+                continue
+        except EOFError:
+            break
+    file_obj.close()
+    return data_container
+
+
 def seperator_all():
     file_object_bin = open('temp.dat', 'rb')
     data_container = [['Roll Number', 'Name', 'Result']]
@@ -25,6 +44,7 @@ def seperator_all():
         data_list = []
         try:
             # Creating an array to be added to the csv file containing roll number and name
+
             data = pkl.load(file_object_bin)
             data_list.extend([int(data.pop(0)), data.pop(0), data.pop(-1)])
             # Creating a dictionary of sorted marks, later to be added in array
@@ -51,25 +71,6 @@ def seperator_all():
         except EOFError:
             file_object_bin.close()
             break
-    return data_container
-
-
-def seperator_single(subject):
-    file_obj = open('temp.dat', 'rb')
-    data_container = [['Roll Number', 'Name', f'{subject} Marks', 'Grades']]
-    while True:
-        try:
-            data = pkl.load(file_obj)
-            data_list = [int(data.pop(0)), data.pop(0)]
-            try:
-                if data[0][subject]:
-                    data_list.extend([int(data[0][subject][0]), data[0][subject][1]])
-                    data_container.append(data_list)
-            except KeyError:
-                continue
-        except EOFError:
-            break
-    file_obj.close()
     return data_container
 
 
