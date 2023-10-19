@@ -39,8 +39,10 @@ class Convert:
         for i in range(0, len(arr), 3):
             if arr[i].isdigit():
                 try:
+                    # Adding the subject name and the marks and grade {'Subject Name: [marks, grades]}
                     score_details[f'{self.subject_code[arr[i]]}'] = [int(arr[i+1]), arr[i+2]]
                 except KeyError:
+                    # {'SUBJECT-CODE: subject_code: [marks, grades]}
                     score_details[f'SUBJECT-CODE: {arr[i]}'] = [int(arr[i+1]), arr[i+2]]
             else:
                 break
